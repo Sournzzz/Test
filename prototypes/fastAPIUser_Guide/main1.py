@@ -115,11 +115,6 @@ async def create_item(item: Item):
 
 # REQUEST BODY + PATH PARAMETERS
 @app.put("/items_tres/{itemt_tres_id}")
-async def update_item(item_id: int, item: Item):
-    return {"item:_id": item_id, **item.model_dump()}
-
-
-@app.put("/items_tres/{itemt_tres_id}")
 async def update_item_query(item_id: int, item: Item, q: str | None = None):
     result = {"item_id": item_id, **item.model_dump()}
     if q:
