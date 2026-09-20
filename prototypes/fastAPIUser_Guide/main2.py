@@ -1,6 +1,7 @@
-from fastapi import FastAPI
-from fastapi import Query
+from fastapi import FastAPI, Query
+from pydantic import AfterValidator
 from typing import Annotated
+import random
 
 app = FastAPI()
 
@@ -10,7 +11,7 @@ app = FastAPI()
 async def read_items(
     q: Annotated[
         str | None, Query(min_length=3, max_length=50, pattern="^fixedquery$")
-    ] = None,  # <- WHEN YOU WANT TE QUERY TO BE REQUIRED YOU JUST AVOID DECLARING A PREDETERMINED PARAMETER
+    ] = None,  # <- WHEN YOU WANT THE QUERY TO BE REQUIRED YOU JUST AVOID DECLARING A PREDETERMINED PARAMETER
 ):
     results = {"items": [{"item_id": "foo"}, {"item_id": "bar"}]}
     if q:
@@ -46,8 +47,8 @@ async def read_items3(
 
 
 # ADDING MORE METADATA FOR THE CONFIGURATION OF DOCS
-@app.get("/items3/")
-async def read_items3(
+@app.get("/items4/")
+async def read_items4(
     q: Annotated[
         list[str] | None,
         Query(
@@ -77,8 +78,8 @@ def check_valid_id(id: str):
     return id
 
 
-@app.get("/items4/")
-async def read_items4(
+@app.get("/items5/")
+async def read_items5(
     id: Annotated[str | None, AfterValidator(check_valid_id)] = None,
 ):
     if id:

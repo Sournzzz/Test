@@ -4,18 +4,44 @@
 <head>
   <meta charset="UTF-8">
   <title>Books</title>
+</head>
 
 <body>
-  <h1>Books Index</h1>
-  <p>Enter book</p>
-  <input type="text" id="input-book">
-  <button id="submit-btn">Submit</button>
-  <ul id="list-book">
-  </ul>
+  <h1>Create Book</h1>
+  <form id="book-create" method="POST">
+    <label for="input-book">Title</label>
+    <input type="text" id="input-book" name="book_title">
 
+    <label for="input-author">Author</label>
+    <input type="text" id="input-author" name="author">
+
+    <label for="input-house">Publishing house</label>
+    <input type="text" id="input-house" name="publishing_house">
+
+    <label for="input-date">Publishing date</label>
+    <input type="date" id="input-date" name="publishing_date"><br><br>
+
+    <fieldset>
+      <legend>Book State</legend>
+
+      <input type="radio" id="read" name="book_state" value="read">
+      <label for="read">Read</label>
+
+      <input type="radio" id="pending" name="book_state" value="pending">
+      <label for="pending">Pending</label>
+
+      <input type="radio" id="in-progress" name="book_state" value="in-progress">
+      <label for="in-progress">In Progress</label>
+
+      <input type="radio" id="paused" name="book_state" value="paused">
+      <label for="paused">Paused</label>
+    </fieldset><br><br>
+
+    <button type="submit" id="submit-btn">Submit</button>
+  </form>
+
+  <p id="book-submitted"></p>
   <script src="index.js"></script>
-
 </body>
-</head>
 
 </html>
