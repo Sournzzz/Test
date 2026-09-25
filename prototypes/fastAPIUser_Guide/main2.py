@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Query
+from fastapi import FastAPI, Query, Path
 from pydantic import AfterValidator
 from typing import Annotated
 import random
@@ -87,3 +87,20 @@ async def read_items5(
     else:
         id, item = random.choice(list(data.items()))
     return {"id": id, "name": item}
+
+
+@app.get("/items/{item_idsinko}")
+async def read_items6(
+    *,
+    item_idsinko: Annotated[
+        int, Path(title="The ID of the item to get", ge=0, le=1000)
+    ],
+    q: str,
+    size: Annotated[float, Query(gt=0, lt=10.5)],
+):
+    results = {"item_id": item_idsinko}
+    if q:
+        results.update({"q": q})
+    if size:
+        results.update({"size": size})
+    return results
